@@ -20,6 +20,11 @@ public class Auditorium {
     @JsonManagedReference
     private List<SeatRow> rows = new ArrayList<>();
 
+    public void addRow(SeatRow row) {
+        rows.add(row);
+        row.setAuditorium(this);
+    }
+
     public Auditorium(int id, String auditoriumName, List<SeatRow> rows) {
         this.id = id;
         this.auditoriumName = auditoriumName;

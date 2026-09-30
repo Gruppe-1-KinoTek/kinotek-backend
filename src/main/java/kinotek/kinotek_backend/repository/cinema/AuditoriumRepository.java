@@ -1,4 +1,9 @@
 package kinotek.kinotek_backend.repository.cinema;
 
-public interface AuditoriumRepository {
+import kinotek.kinotek_backend.model.cinema.Auditorium;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface AuditoriumRepository extends JpaRepository<Auditorium, String> {
+
+
 }
