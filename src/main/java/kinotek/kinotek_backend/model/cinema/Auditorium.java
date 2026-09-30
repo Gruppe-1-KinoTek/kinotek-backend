@@ -26,6 +26,10 @@ public class Auditorium {
         this.rows = rows;
     }
 
+    public Auditorium() {
+
+    }
+
     public int getId() {
         return id;
     }
