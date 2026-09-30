@@ -1,4 +1,4 @@
 package kinotek.kinotek_backend.model.cinema;
 
-public class Seat {
+public class Row {
 }
