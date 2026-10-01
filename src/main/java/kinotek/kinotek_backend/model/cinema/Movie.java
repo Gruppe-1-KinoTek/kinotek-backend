@@ -14,6 +14,7 @@ public class Movie {
     private String imdbRef;
     private String imageRef;
 
+    //getters and setters
     public int getMovieId() {
         return movieId;
     }
