@@ -1,6 +1,11 @@
 package kinotek.kinotek_backend.model.user;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import kinotek.kinotek_backend.model.cinema.Order;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Customer {
@@ -13,6 +18,18 @@ public class Customer {
     private String name;
     private String email;
     private String password;
+
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
+    @JsonBackReference
+    private Set<Order> orders = new HashSet<>();
 
     public int getId() {
         return id;
