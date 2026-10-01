@@ -1,5 +1,7 @@
 services:
   db:
+    networks:
+      - prod-network
     image: mysql:8.4
     restart: unless-stopped
     environment:

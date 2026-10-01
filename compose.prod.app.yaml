@@ -11,6 +11,8 @@ services:
       SPRING_JPA_HIBERNATE_DDL_AUTO: ${SPRING_JPA_HIBERNATE_DDL_AUTO}
     ports:
       - "127.0.0.1:8081:8081"
+    networks:
+      - prod-network
     healthcheck:
       test: [ "CMD-SHELL", "wget -qO- http://localhost:8081/actuator/health >/dev/null 2>&1 || exit 1" ]
       interval: 15s
