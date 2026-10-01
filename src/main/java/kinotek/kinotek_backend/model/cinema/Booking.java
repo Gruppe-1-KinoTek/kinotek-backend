@@ -32,4 +32,12 @@ public class Booking {
     public void setShowing(Showing showing) {this.showing = showing;}
     public void setOrder(Order order) {this.order = order;}
 
+    @Override
+    public String toString() {
+        return "Booking{" +
+                "seat=" + seat +
+                ", showing=" + showing +
+                ", order=" + order +
+                '}';
+    }
 }
