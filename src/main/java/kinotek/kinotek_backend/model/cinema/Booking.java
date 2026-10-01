@@ -3,7 +3,6 @@ package kinotek.kinotek_backend.model.cinema;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "booking")
 @IdClass(BookingId.class)
 public class Booking {
 
@@ -18,7 +17,7 @@ public class Booking {
     private Showing showing;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "order_id", referencedColumnName = "order_id")
+    @JoinColumn(name = "order", referencedColumnName = "order_id")
     private Order order;
 
     //GETTERS
