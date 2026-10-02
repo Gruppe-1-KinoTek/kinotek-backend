@@ -5,6 +5,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 public class Movie {
 
@@ -16,10 +18,17 @@ public class Movie {
     private String imdbRef;
     private String imageRef;
 
-    //Many to one
     @ManyToOne
     @JoinColumn(name = "ageRating", referencedColumnName = "ageRatingId")
     private AgeRating ageRating;
+
+    @ManyToMany
+    @JoinTable(
+            name = "movie_genre",
+            joinColumns = @JoinColumn(name = "movieId"),
+            inverseJoinColumns = @JoinColumn(name = "genreId")
+    )
+    Set<Genre> genres;
 
     //getters and setters
     public int getMovieId() {
