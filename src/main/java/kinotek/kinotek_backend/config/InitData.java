@@ -513,7 +513,7 @@ public class InitData implements CommandLineRunner {
         Customer c = new Customer();
         c.setName(name);
         c.setEmail(email);
-        c.setPassword("test1234"); // TODO: hash med BCrypt når I får login
+        c.setPassword("test1234");
         return c;
     }
 
