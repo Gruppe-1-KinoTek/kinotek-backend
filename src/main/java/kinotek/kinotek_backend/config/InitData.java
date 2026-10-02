@@ -3,9 +3,11 @@ package kinotek.kinotek_backend.config;
 import kinotek.kinotek_backend.repository.cinema.*;
 import kinotek.kinotek_backend.repository.user.CustomerRepository;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 @Component
+@Profile("dev")
 public class InitData implements CommandLineRunner {
 
     private final AgeRatingRepository ageRatingRepository;
