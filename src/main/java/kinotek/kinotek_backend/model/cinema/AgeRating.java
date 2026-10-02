@@ -1,10 +1,7 @@
 package kinotek.kinotek_backend.model.cinema;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,7 +10,8 @@ import java.util.Set;
 public class AgeRating {
 
     @Id
-    private int ageRatingId;
+    @Column(name = "age_rating_id")
+    private int id;
     private String ageRating;
 
     //One to many
@@ -21,12 +19,12 @@ public class AgeRating {
     @JsonBackReference
     private Set<Movie> movies = new HashSet<>();
 
-    public int getAgeRatingId() {
-        return ageRatingId;
+    public int getId() {
+        return id;
     }
 
-    public void setAgeRatingId(int ageRatingId) {
-        this.ageRatingId = ageRatingId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getAgeRating() {

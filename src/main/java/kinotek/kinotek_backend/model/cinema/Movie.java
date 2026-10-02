@@ -11,7 +11,9 @@ import java.util.Set;
 public class Movie {
 
     @Id
-    private int movieId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "movie_id")
+    private int id;
     private String movieName;
     private int duration;
     private String description;
@@ -19,24 +21,24 @@ public class Movie {
     private String imageRef;
 
     @ManyToOne
-    @JoinColumn(name = "ageRating", referencedColumnName = "ageRatingId")
+    @JoinColumn(name = "ageRating", referencedColumnName = "age_rating_id")
     private AgeRating ageRating;
 
     @ManyToMany
     @JoinTable(
             name = "movie_genre",
-            joinColumns = @JoinColumn(name = "movieId"),
-            inverseJoinColumns = @JoinColumn(name = "genreId")
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id")
     )
     private Set<Genre> genres;
 
     //getters and setters
-    public int getMovieId() {
-        return movieId;
+    public int getId() {
+        return id;
     }
 
-    public void setMovieId(int movieId) {
-        this.movieId = movieId;
+    public void setId(int Id) {
+        this.id = id;
     }
 
     public String getMovieName() {

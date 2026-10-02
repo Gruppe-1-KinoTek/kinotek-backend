@@ -7,21 +7,17 @@ import java.time.LocalDateTime;
 @Entity
 public class Showing {
     @Id
-    private int showingId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "showing_id")
+    private int id;
     private LocalDateTime dateTime;
 
     @ManyToOne
-    @JoinColumn(name = "id", referencedColumnName = "auditorium_id")
+    @JoinColumn(name = "auditorium", referencedColumnName = "auditorium_id")
     private Auditorium  auditorium;
 
 
-    public int getShowingId() {
-        return showingId;
-    }
 
-    public void setShowingId(int showingId) {
-        this.showingId = showingId;
-    }
 
     public LocalDateTime getDateTime() {
         return dateTime;
@@ -37,5 +33,13 @@ public class Showing {
 
     public void setAuditorium(Auditorium auditorium) {
         this.auditorium = auditorium;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
