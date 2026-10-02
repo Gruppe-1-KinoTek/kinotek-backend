@@ -3,20 +3,22 @@ package kinotek.kinotek_backend.model.cinema;
 import jakarta.persistence.*;
 
 @Entity
-@IdClass(BookingId.class)
 public class Booking {
 
     @Id
-    @ManyToOne(optional = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "booking_id")
+    private int id;
+
+    @ManyToOne
     @JoinColumn(name = "seat", referencedColumnName = "seat_id")
     private Seat seat;
 
-    @Id
-    @ManyToOne(optional = false)
+    @ManyToOne
     @JoinColumn(name = "showing", referencedColumnName = "showing_id")
     private Showing showing;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     @JoinColumn(name = "order", referencedColumnName = "order_id")
     private Order order;
 
