@@ -1,4 +1,7 @@
 package kinotek.kinotek_backend.repository.user;
 
-public interface CustomerRepository {
+import kinotek.kinotek_backend.model.user.Customer;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 }
