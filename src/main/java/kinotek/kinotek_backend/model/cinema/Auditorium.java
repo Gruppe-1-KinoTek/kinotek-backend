@@ -16,6 +16,7 @@ public class Auditorium {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "auditorium_id")
     private int id;
     private String auditoriumName;
 
