@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import kinotek.kinotek_backend.model.user.Employee;
+import org.springframework.core.annotation.Order;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,7 @@ public class Auditorium {
     private String auditoriumName;
 
     @OneToMany(mappedBy = "auditorium",cascade = CascadeType.ALL, orphanRemoval = true)
+    @OrderBy("rowLetter ASC")
     @JsonManagedReference
     private List<SeatRow> rows = new ArrayList<>();
 

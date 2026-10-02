@@ -20,6 +20,7 @@ public class SeatRow {
     private String rowLetter;
 
     @OneToMany(mappedBy = "row", cascade = CascadeType.ALL)
+    @OrderBy("seatNumber ASC")
     @JsonManagedReference
     private List<Seat> seats = new ArrayList<>();
 
