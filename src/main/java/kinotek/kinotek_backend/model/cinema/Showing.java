@@ -1,5 +1,6 @@
 package kinotek.kinotek_backend.model.cinema;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -16,7 +17,9 @@ public class Showing {
     @JoinColumn(name = "auditorium", referencedColumnName = "auditorium_id")
     private Auditorium  auditorium;
 
-
+    @ManyToOne
+    @JoinColumn(name = "movie", referencedColumnName = "movie_id")
+    private Movie movie;
 
 
     public LocalDateTime getDateTime() {
@@ -41,5 +44,23 @@ public class Showing {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Movie getMovie() {
+        return movie;
+    }
+
+    public void setMovie(Movie movie) {
+        this.movie = movie;
+    }
+
+    @Override
+    public String toString() {
+        return "Showing{" +
+                "id=" + id +
+                ", dateTime=" + dateTime +
+                ", auditorium=" + auditorium +
+                ", movie=" + movie +
+                '}';
     }
 }

@@ -20,7 +20,7 @@ public class Invoice {
     private Customer customer;
     private LocalDateTime purchaseTime;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "invoice")
     private Set<Booking> bookings = new HashSet<>();
 
     public int getId() {
