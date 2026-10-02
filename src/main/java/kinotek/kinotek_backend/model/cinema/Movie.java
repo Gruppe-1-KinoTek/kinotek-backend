@@ -2,6 +2,10 @@ package kinotek.kinotek_backend.model.cinema;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
+
+import java.util.Set;
 
 @Entity
 public class Movie {
@@ -13,6 +17,18 @@ public class Movie {
     private String description;
     private String imdbRef;
     private String imageRef;
+
+    @ManyToOne
+    @JoinColumn(name = "ageRating", referencedColumnName = "ageRatingId")
+    private AgeRating ageRating;
+
+    @ManyToMany
+    @JoinTable(
+            name = "movie_genre",
+            joinColumns = @JoinColumn(name = "movieId"),
+            inverseJoinColumns = @JoinColumn(name = "genreId")
+    )
+    Set<Genre> genres;
 
     //getters and setters
     public int getMovieId() {
@@ -61,5 +77,13 @@ public class Movie {
 
     public void setImageRef(String imageRef) {
         this.imageRef = imageRef;
+    }
+
+    public AgeRating getAgeRating() {
+        return ageRating;
+    }
+
+    public void setAgeRating(AgeRating ageRating) {
+        this.ageRating = ageRating;
     }
 }
