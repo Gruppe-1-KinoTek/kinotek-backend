@@ -2,7 +2,7 @@ package kinotek.kinotek_backend.model.user;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import kinotek.kinotek_backend.model.cinema.Order;
+import kinotek.kinotek_backend.model.cinema.Invoice;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -19,17 +19,9 @@ public class Customer {
     private String email;
     private String password;
 
-    public Set<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(Set<Order> orders) {
-        this.orders = orders;
-    }
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
+    @OneToMany(mappedBy = "customer")
     @JsonBackReference
-    private Set<Order> orders = new HashSet<>();
+    private Set<Invoice> invoices = new HashSet<>();
 
     public int getId() {
         return id;
@@ -63,6 +55,15 @@ public class Customer {
         this.password = password;
     }
 
+
+    public Set<Invoice> getInvoices() {
+        return invoices;
+    }
+
+    public void setInvoices(Set<Invoice> invoices) {
+        this.invoices = invoices;
+    }
+
     @Override
     public String toString() {
         return "Customer{" +
@@ -70,6 +71,7 @@ public class Customer {
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", invoices=" + invoices +
                 '}';
     }
 }

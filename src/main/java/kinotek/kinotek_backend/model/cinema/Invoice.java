@@ -4,19 +4,24 @@ import jakarta.persistence.*;
 import kinotek.kinotek_backend.model.user.Customer;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-public class Order {
+public class Invoice {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "order_id")
+    @Column(name = "invoice_id")
     private int id;
 
     @ManyToOne
     @JoinColumn(name = "customer", referencedColumnName = "customer_id")
     private Customer customer;
     private LocalDateTime purchaseTime;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
+    private Set<Booking> bookings = new HashSet<>();
 
     public int getId() {
         return id;
@@ -42,12 +47,21 @@ public class Order {
         this.purchaseTime = purchaseTime;
     }
 
+    public Set<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(Set<Booking> bookings) {
+        this.bookings = bookings;
+    }
+
     @Override
     public String toString() {
-        return "Order{" +
+        return "Invoice{" +
                 "id=" + id +
                 ", customer=" + customer +
                 ", purchaseTime=" + purchaseTime +
+                ", bookings=" + bookings +
                 '}';
     }
 }

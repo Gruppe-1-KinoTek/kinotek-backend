@@ -19,26 +19,29 @@ public class Booking {
     private Showing showing;
 
     @ManyToOne
-    @JoinColumn(name = "order", referencedColumnName = "order_id")
-    private Order order;
+    @JoinColumn(name = "invoice", referencedColumnName = "invoice_id")
+    private Invoice invoice;
 
     //GETTERS
+    public int getId() {return id;}
     public Seat getSeat() {return seat;}
     public Showing getShowing() {return showing;}
-    public Order getOrder() {return order;}
+    public Invoice getInvoice() {return invoice;}
 
 
     //SETTERS
+    public void setId(int id) {this.id = id;}
     public void setSeat(Seat seat) {this.seat = seat;}
     public void setShowing(Showing showing) {this.showing = showing;}
-    public void setOrder(Order order) {this.order = order;}
+    public void setInvoice(Invoice invoice) {this.invoice = invoice;}
 
     @Override
     public String toString() {
         return "Booking{" +
-                "seat=" + seat +
+                "id=" + id +
+                ", seat=" + seat +
                 ", showing=" + showing +
-                ", order=" + order +
+                ", invoice=" + invoice +
                 '}';
     }
 }
