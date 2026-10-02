@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 public class Booking {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "booking_id")
     private int bookingId;
 
     @ManyToOne(optional = false)
