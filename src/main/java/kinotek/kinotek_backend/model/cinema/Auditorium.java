@@ -1,11 +1,13 @@
 package kinotek.kinotek_backend.model.cinema;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import kinotek.kinotek_backend.model.user.Employee;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -19,6 +21,10 @@ public class Auditorium {
     @OneToMany(mappedBy = "auditorium",cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<SeatRow> rows = new ArrayList<>();
+
+    @OneToMany(mappedBy = "auditorium")
+    @JsonBackReference
+    private Set<Showing> showings;
 
     public void addRow(SeatRow row) {
         rows.add(row);
@@ -60,4 +66,11 @@ public class Auditorium {
     }
 
 
+    public Set<Showing> getShowings() {
+        return showings;
+    }
+
+    public void setShowings(Set<Showing> showings) {
+        this.showings = showings;
+    }
 }

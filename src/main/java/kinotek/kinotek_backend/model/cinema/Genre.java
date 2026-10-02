@@ -14,7 +14,7 @@ public class Genre {
     private String genreName;
 
     @ManyToMany(mappedBy = "genres")
-    Set<Movie> movies;
+    private Set<Movie> movies;
 
     public int getGenreId() {
         return genreId;

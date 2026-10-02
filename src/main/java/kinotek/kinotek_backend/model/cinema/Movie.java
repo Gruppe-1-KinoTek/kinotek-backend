@@ -28,7 +28,7 @@ public class Movie {
             joinColumns = @JoinColumn(name = "movieId"),
             inverseJoinColumns = @JoinColumn(name = "genreId")
     )
-    Set<Genre> genres;
+    private Set<Genre> genres;
 
     //getters and setters
     public int getMovieId() {
@@ -85,5 +85,13 @@ public class Movie {
 
     public void setAgeRating(AgeRating ageRating) {
         this.ageRating = ageRating;
+    }
+
+    public Set<Genre> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(Set<Genre> genres) {
+        this.genres = genres;
     }
 }
