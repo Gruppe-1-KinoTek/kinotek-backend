@@ -10,19 +10,13 @@ import java.util.Set;
 public class Genre {
 
     @Id
-    private int genreId;
+    @Column(name = "genre_id")
+    private int id;
     private String genreName;
 
     @ManyToMany(mappedBy = "genres")
-    Set<Movie> movies;
+    private Set<Movie> movies;
 
-    public int getGenreId() {
-        return genreId;
-    }
-
-    public void setGenreId(int genreId) {
-        this.genreId = genreId;
-    }
 
     public String getGenreName() {
         return genreName;
@@ -30,5 +24,21 @@ public class Genre {
 
     public void setGenreName(String genreName) {
         this.genreName = genreName;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Set<Movie> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(Set<Movie> movies) {
+        this.movies = movies;
     }
 }
