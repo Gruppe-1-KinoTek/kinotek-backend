@@ -13,14 +13,14 @@ public class SeatRow {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "auditorium_id")
     private Auditorium auditorium;
 
     private String rowLetter;
 
     @OneToMany(mappedBy = "row", cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @OrderBy("seatNumber ASC")
     private List<Seat> seats = new ArrayList<>();
 
     public void addSeat(Seat seat) {

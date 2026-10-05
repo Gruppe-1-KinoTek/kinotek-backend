@@ -8,12 +8,13 @@ public class Seat {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "seat_id")
     private int id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "row_id")
-    @JsonBackReference
-    private SeatRow seatRow;
+    @JsonBackReference("row-seats")
+    private SeatRow row;
 
     private int seatNumber;
     private boolean accessible;
@@ -27,11 +28,11 @@ public class Seat {
     }
 
     public SeatRow getRow() {
-        return seatRow;
+        return row;
     }
 
-    public void setRow(SeatRow seatRow) {
-        this.seatRow = seatRow;
+    public void setRow(SeatRow row) {
+        this.row = row;
     }
 
     public int getSeatNumber() {

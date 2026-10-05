@@ -1,25 +1,49 @@
 package kinotek.kinotek_backend.model.cinema;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
+
+import java.util.Set;
 
 @Entity
 public class Movie {
 
     @Id
-    private int movieId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "movie_id")
+    private int id;
     private String movieName;
     private int duration;
     private String description;
     private String imdbRef;
     private String imageRef;
 
-    public int getMovieId() {
-        return movieId;
+    @ManyToOne
+    @JoinColumn(name = "ageRating", referencedColumnName = "age_rating_id")
+    private AgeRating ageRating;
+
+    @ManyToMany
+    @JoinTable(
+            name = "movie_genre",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id")
+    )
+    private Set<Genre> genres;
+
+    @OneToMany(mappedBy = "movie")
+    @JsonBackReference
+    private Set<Showing> showings;
+
+    //getters and setters
+    public int getId() {
+        return id;
     }
 
-    public void setMovieId(int movieId) {
-        this.movieId = movieId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getMovieName() {
@@ -60,5 +84,21 @@ public class Movie {
 
     public void setImageRef(String imageRef) {
         this.imageRef = imageRef;
+    }
+
+    public AgeRating getAgeRating() {
+        return ageRating;
+    }
+
+    public void setAgeRating(AgeRating ageRating) {
+        this.ageRating = ageRating;
+    }
+
+    public Set<Genre> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(Set<Genre> genres) {
+        this.genres = genres;
     }
 }
