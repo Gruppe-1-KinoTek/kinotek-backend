@@ -11,7 +11,7 @@ public class Seat {
     @Column(name = "seat_id")
     private int id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "row_id")
     @JsonBackReference("row-seats")
     private SeatRow row;
