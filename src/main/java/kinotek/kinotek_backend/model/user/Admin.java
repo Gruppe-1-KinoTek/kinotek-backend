@@ -1,6 +1,9 @@
 package kinotek.kinotek_backend.model.user;
 
 import jakarta.persistence.*;
+import kinotek.kinotek_backend.model.cinema.Movie;
+
+import java.util.List;
 
 @Entity
 public class Admin implements Employee{
@@ -47,28 +50,5 @@ public class Admin implements Employee{
     }
 
 
-    @Override
-    public boolean canShowMovies(){
-        return true;
-    }
 
-    @Override
-    public boolean canManegeMovies(){
-        return true;
-    }
-
-    @Override
-    public boolean canManegeEmployees(){
-        return true;
-    }
-
-    @Override
-    public boolean canManegeShowings(){
-        return true;
-    }
-
-    @Override
-    public boolean canMangeAuditorium(){
-        return true;
-    }
 }
