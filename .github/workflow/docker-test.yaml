@@ -9,7 +9,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1, 2026-07-17
 
-      - name: Run Docker container
+      - name: Run Dockergit checkout -b SCRUM-226-ci-opret-github-workflows-med-relevante-yaml container
         run: |
           # Run the container in detached mode
           docker compose -f compose.test.yml up -d
