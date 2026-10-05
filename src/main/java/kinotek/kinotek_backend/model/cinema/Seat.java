@@ -8,6 +8,7 @@ public class Seat {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "seat_id")
     private int id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
