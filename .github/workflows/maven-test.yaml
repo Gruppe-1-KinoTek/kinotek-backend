@@ -23,5 +23,5 @@ jobs:
           restore-keys: ${{ runner.os }}-maven-
 
       - name: Run tests
-        working-directory: app
+        working-directory: .
         run: mvn -B verify -Dspring.profiles.active=prod
