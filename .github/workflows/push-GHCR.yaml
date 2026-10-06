@@ -31,7 +31,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@dc802804100637a589fabce1cb79ff13a1411302 # v6.2.0   Jul 2nd 2026
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/app
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/backend
           tags: |
             type=ref,event=branch
             type=sha,prefix={{branch}}-
