@@ -24,4 +24,4 @@ jobs:
 
       - name: Run tests
         working-directory: app
-        run: mvn -B verify -Dspring.profiles.active=ci
+        run: mvn -B verify -Dspring.profiles.active=prod
