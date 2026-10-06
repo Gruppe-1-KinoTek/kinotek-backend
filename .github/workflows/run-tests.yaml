@@ -9,11 +9,12 @@ on:
       [ main, dev ]
 
 jobs:
-  maven-test:
-    uses: ./.github/workflows/maven-test.yaml
-
   make-env:
     uses: ./.github/workflows/github-secrets.yaml
+
+  maven-test:
+    needs: make-env
+    uses: ./.github/workflows/maven-test.yaml
 
   docker-test:
     needs: maven-test
