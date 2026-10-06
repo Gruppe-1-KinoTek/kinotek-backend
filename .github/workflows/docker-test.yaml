@@ -12,7 +12,7 @@ jobs:
       - name: Run Docker
         run: |
           # Run the container in detached mode
-          docker compose -f compose.test.yml up -d
+          docker compose -f compose.test.yaml up -d
           
           # Wait for a few seconds to ensure the container is up and running
           sleep 20
@@ -21,4 +21,4 @@ jobs:
           curl -f http://localhost:8081/actuator/health || exit 1
 
           # Stop and remove the container
-          docker compose -f ./compose.test.yml down
+          docker compose -f compose.test.yaml down
