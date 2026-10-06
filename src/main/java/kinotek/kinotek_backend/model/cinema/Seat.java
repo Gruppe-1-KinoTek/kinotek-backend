@@ -17,6 +17,7 @@ public class Seat {
     private SeatRow row;
 
     private int seatNumber;
+    @Column(name = "is_accessible")
     private boolean accessible;
 
     public int getId() {
