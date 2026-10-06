@@ -22,6 +22,7 @@ public class Auditorium {
 
     @OneToMany(mappedBy = "auditorium",cascade = CascadeType.ALL, orphanRemoval = true)
     @OrderBy("rowLetter ASC")
+    @JsonManagedReference
     private List<SeatRow> rows = new ArrayList<>();
 
     @OneToMany(mappedBy = "auditorium")
