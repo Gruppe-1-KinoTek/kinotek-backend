@@ -12,6 +12,9 @@ jobs:
   maven-test:
     uses: ./.github/workflows/maven-test.yaml
 
+  make-env:
+    uses: ./.github/workflows/github-secrets.yaml
+
   docker-test:
     needs: maven-test
     uses: ./.github/workflows/docker-test.yaml
