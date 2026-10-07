@@ -3,8 +3,6 @@ package kinotek.kinotek_backend.model.cinema;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import kinotek.kinotek_backend.model.user.Employee;
-import org.springframework.core.annotation.Order;
 
 import java.util.ArrayList;
 import java.util.List;
