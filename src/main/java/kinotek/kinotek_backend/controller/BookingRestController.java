@@ -34,7 +34,7 @@ public class BookingRestController {
     }
 
 
-    @GetMapping("/api/showings/{showingId}/seat-map")
+    @GetMapping("/api/showing/{showingId}/seat-map")
     public SeatMapDto getSeatMap(@PathVariable int showingId) {
         return showingService.getSeatMap(showingId);
     }
