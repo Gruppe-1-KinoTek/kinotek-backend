@@ -11,6 +11,8 @@ jobs:
 
   docker-test:
     needs: maven-test
+    secrets:
+      TEST_SECRETS: ${{ secrets.TEST_SECRETS }}
     uses: ./.github/workflows/docker-test.yaml
 
   push-ghcr:
