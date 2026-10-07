@@ -48,13 +48,7 @@ public class BookingServiceImpl implements BookingService {
 
     }
 
-    @Override
-    public List<Booking> getBookedSeatIds(int showingId) {
-        return bookingRepository.findByShowingId(showingId);
-    }
 
-
-    @Override
     @Transactional
     public Map<String, Object> createBookings(int showingId, Set<Integer> seatIds,
                                               @Nullable String email, Integer phoneNumber) {
