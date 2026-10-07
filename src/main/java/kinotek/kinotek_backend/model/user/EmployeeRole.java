@@ -18,7 +18,7 @@ public class EmployeeRole {
 
     private String roleName;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ageRating")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
     @JsonBackReference
     private Set<Employee> employees = new HashSet<>();
 
