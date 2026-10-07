@@ -16,14 +16,14 @@ public class SeatRow {
 
     @ManyToOne
     @JoinColumn(name = "auditorium_id")
-    @JsonBackReference
+    @JsonBackReference("auditorium-rows")
     private Auditorium auditorium;
 
     private String rowLetter;
 
     @OneToMany(mappedBy = "row", cascade = CascadeType.ALL)
     @OrderBy("seatNumber ASC")
-    @JsonBackReference
+    @JsonBackReference("row-seats")
     private List<Seat> seats = new ArrayList<>();
 
     public void addSeat(Seat seat) {

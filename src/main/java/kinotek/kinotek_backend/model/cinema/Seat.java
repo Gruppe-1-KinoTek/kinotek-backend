@@ -14,7 +14,7 @@ public class Seat {
 
     @ManyToOne
     @JoinColumn(name = "row_id")
-    @JsonManagedReference
+    @JsonManagedReference("row-seats")
     private SeatRow row;
 
     private int seatNumber;
