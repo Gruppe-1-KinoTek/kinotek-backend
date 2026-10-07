@@ -6,7 +6,7 @@ import kinotek.kinotek_backend.model.cinema.Booking;
 import kinotek.kinotek_backend.model.cinema.Seat;
 import kinotek.kinotek_backend.model.cinema.Showing;
 import kinotek.kinotek_backend.service.BookingService;
-import kinotek.kinotek_backend.service.MovieService;
+
 import kinotek.kinotek_backend.service.SeatService;
 import kinotek.kinotek_backend.service.ShowingService;
 import org.springframework.http.HttpStatus;
