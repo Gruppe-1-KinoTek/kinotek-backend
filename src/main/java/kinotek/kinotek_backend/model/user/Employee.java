@@ -41,4 +41,7 @@ public class Employee {
         this.password = password;
     }
 
+    public Employee() {
+
+    }
 }
