@@ -24,7 +24,7 @@ public class BookingRestController {
         this.seatService = seatService;
     }
 
-    @GetMapping("/showing/{showingId}")
+    @GetMapping("/showing/{showingId}/booked-seats")
     public List<Seat> getBookedSeats(@PathVariable int showingId) {
         return seatService.getBookedSeats(showingId);
     }
