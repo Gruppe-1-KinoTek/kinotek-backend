@@ -7,7 +7,7 @@ public record SeatMapDto (
     int auditoriumId,
     String auditoriumName,
     String movieName,
-    LocalDateTime dateTime,
+    LocalDateTime showingDateTime,
     List<SeatStatusDto> seats
 ) {
 
