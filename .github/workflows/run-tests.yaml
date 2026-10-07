@@ -1,0 +1,22 @@
+name: run-tests
+
+on:
+  pull_request:
+    branches:
+      [ main, dev ]
+  push:
+    branches:
+      [ main, dev ]
+
+jobs:
+  make-env:
+    uses: ./.github/workflows/github-secrets.yaml
+
+  maven-test:
+    needs: make-env
+    uses: ./.github/workflows/maven-test.yaml
+
+  docker-test:
+    needs: maven-test
+    uses: ./.github/workflows/docker-test.yaml
+
