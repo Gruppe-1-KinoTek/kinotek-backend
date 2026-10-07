@@ -13,7 +13,7 @@ public class SeatRow {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "auditorium_id")
     private Auditorium auditorium;
 
@@ -21,7 +21,6 @@ public class SeatRow {
 
     @OneToMany(mappedBy = "row", cascade = CascadeType.ALL)
     @OrderBy("seatNumber ASC")
-    @JsonManagedReference
     private List<Seat> seats = new ArrayList<>();
 
     public void addSeat(Seat seat) {
