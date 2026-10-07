@@ -6,7 +6,11 @@ import kinotek.kinotek_backend.model.cinema.Showing;
 import java.time.LocalDate;
 import java.util.List;
 
+import kinotek.kinotek_backend.dto.SeatMapDto;
+
 public interface ShowingService {
+
+    public SeatMapDto getSeatMap(int showingId);
 
     List<Showing> findAllShowing();
     Showing findShowingById(int id);
