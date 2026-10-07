@@ -9,7 +9,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 // OBS - crossorigin her = forbigå CORS violation når vi tilgår backend via nginx osv
 @RestController
-@RequestMapping("/api/admin")
+@RequestMapping("/api/employee")
 @CrossOrigin
 public class EmployeeRestController {
 
@@ -18,7 +18,7 @@ public class EmployeeRestController {
     // records = DTO som bor i controller for formålet af opgaven.
     // ikke konventionelt = hurtigt og nemt for formålet
     record LoginRequest(String name, String password) {}
-    record LoginResponse(String name) {}
+    record LoginResponse(String name, String role) {}
 
     private final EmployeeRepository employeeRepository;
 
@@ -33,9 +33,9 @@ public class EmployeeRestController {
     // proof of concept = ikke opgavekrav.
     @PostMapping("/login")
     public LoginResponse login(@RequestBody LoginRequest request) {
-        Employee employee = employeeRepository.findByNameAndPassword(request.name(), request.password())
+        Employee employee = employeeRepository.findByEmployeeNameAndPassword(request.name(), request.password())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Wrong name or password"));
-        return new LoginResponse(employee.getEmployeeName());
+        return new LoginResponse(employee.getEmployeeName(), employee.getRole().getRoleName());
     }
 
 }

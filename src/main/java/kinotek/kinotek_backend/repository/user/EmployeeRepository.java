@@ -7,10 +7,10 @@ import java.util.Optional;
 
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
-    boolean existsByName(String name);
+    boolean existsByEmployeeName(String employeeName);
 
-    Optional<Employee> findByName(String name);
-    Optional<Employee> findByNameAndPassword(String name, String password);
+    Optional<Employee> findByEmployeeName(String employeeName);
+    Optional<Employee> findByEmployeeNameAndPassword(String employeeName, String password);
 
 
 }
