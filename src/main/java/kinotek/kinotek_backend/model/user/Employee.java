@@ -1,6 +1,5 @@
 package kinotek.kinotek_backend.model.user;
 
-
 import jakarta.persistence.*;
 
 @Entity
@@ -14,7 +13,7 @@ public class Employee {
     private String password;
 
     @ManyToOne
-    @JoinColumn(name = "roles", referencedColumnName = "role_id")
+    @JoinColumn(name = "role", referencedColumnName = "role_id")
     private EmployeeRole role;
 
     public int getId() {
