@@ -108,7 +108,7 @@ public class MovieServiceImpl implements MovieService {
                 movie.getDescription(),
                 movie.getImdbRef(),
                 movie.getImageRef(),
-                movie.getAgeRating().getId(),
+                ageRatingId,
                 genreIds
         );
     }
