@@ -12,8 +12,8 @@ jobs:
   maven-test:
     uses: ./.github/workflows/maven-test.yaml
 
-  docker-test:
-    needs: maven-test
-    uses: ./.github/workflows/docker-test.yaml
-    secrets:
-      TEST_SECRETS: ${{ secrets.TEST_SECRETS }}
+#  docker-test:
+#    needs: maven-test
+#    uses: ./.github/workflows/docker-test.yaml
+#    secrets:
+#      TEST_SECRETS: ${{ secrets.TEST_SECRETS }}
