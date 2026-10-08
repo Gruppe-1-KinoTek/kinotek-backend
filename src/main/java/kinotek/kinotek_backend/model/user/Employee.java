@@ -43,4 +43,7 @@ public class Employee {
     public Employee() {
 
     }
+
+    public EmployeeRole getRole() { return role; }
+    public void setRole(EmployeeRole role) { this.role = role; }
 }
