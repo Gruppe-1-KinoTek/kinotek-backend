@@ -10,6 +10,15 @@ import kinotek.kinotek_backend.dto.SeatMapDto;
 
 public interface ShowingService {
 
+    List<Showing> findAllShowing();
+    Showing findShowingById(int id);
+    List<Showing> findShowingByMovieAndDate(Movie movie, LocalDate dateToFind);
+    List<Showing> findShowingByMovie(Movie movie);
+    List<Showing> findUpcomingShowing();
+    void saveShowing(Showing showing);
+    void deleteShowing(Showing showing);
+    void deleteShowingById(int id);
+
     public SeatMapDto getSeatMap(int showingId);
 
     List<Showing> findAllShowing();
