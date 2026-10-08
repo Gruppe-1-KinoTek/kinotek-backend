@@ -2,6 +2,8 @@ package kinotek.kinotek_backend.service;
 
 import kinotek.kinotek_backend.dto.SeatMapDto;
 import kinotek.kinotek_backend.dto.SeatStatusDto;
+import kinotek.kinotek_backend.dto.ShowingDTO;
+import kinotek.kinotek_backend.dto.ShowingMapper;
 import kinotek.kinotek_backend.model.cinema.*;
 import kinotek.kinotek_backend.repository.cinema.ShowingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +21,14 @@ import java.util.Set;
 
 @Service
 public class ShowingServiceImpl implements ShowingService{
-
     private final ShowingRepository showingRepository;
+    private final ShowingMapper showingMapper;
 
 
-    public ShowingServiceImpl(ShowingRepository showingRepository) {
+    public ShowingServiceImpl(ShowingRepository showingRepository, ShowingMapper showingMapper) {
+
         this.showingRepository = showingRepository;
+        this.showingMapper = showingMapper;
     }
 
 
@@ -41,8 +45,8 @@ public class ShowingServiceImpl implements ShowingService{
     }
 
     @Override
-    public List<Showing> findShowingByMovieAndDate(Movie movie, LocalDate dateToFind){
-        List<Showing> allShowings = showingRepository.findByMovie(movie);
+    public List<Showing> findShowingByMovieAndDate(int movie_id, LocalDate dateToFind){
+        List<Showing> allShowings = showingRepository.findByMovie(movie_id);
         List<Showing> showingsToReturn = new ArrayList<>();
 
         for(Showing showing: allShowings){
@@ -55,16 +59,30 @@ public class ShowingServiceImpl implements ShowingService{
     }
 
     @Override
-    public List<Showing> findShowingByMovie(Movie movie){
-        return showingRepository.findByMovie(movie);
+    public List<Showing> findShowingByMovie(int movie_id){
+        return showingRepository.findByMovie(movie_id);
     }
 
     @Override
     public List<Showing> findUpcomingShowing(){
         List<Showing> allShowings = showingRepository.findAll();
+        return extractUpcomingShowing(allShowings);
+    }
+
+    @Override
+    public List<ShowingDTO> findUpcomingShowingByMovie(int movie_id){
+        List<Showing> foundShowings = extractUpcomingShowing(showingRepository.findByMovie(movie_id));
+        List<ShowingDTO> showingDTOs = new ArrayList<>();
+        for(Showing showing: foundShowings){
+            showingDTOs.add(showingMapper.showingToDto(showing));
+        }
+        return showingDTOs;
+    }
+
+    private List<Showing> extractUpcomingShowing(List<Showing> showingsToPrune){
         List<Showing> showingsToReturn = new ArrayList<>();
 
-        for(Showing showing: allShowings){
+        for(Showing showing: showingsToPrune){
             LocalDate showingDate = showing.getDateTime().toLocalDate();
             LocalDate currentDate = LocalDate.now();
             if(showingDate.isAfter(currentDate) || showingDate.isEqual(currentDate)){
@@ -86,7 +104,7 @@ public class ShowingServiceImpl implements ShowingService{
 
     @Override
     public void deleteShowingById(int id){
-        deleteShowing(findShowingById(id));
+        showingRepository.deleteById(id);
     }
 
 }
