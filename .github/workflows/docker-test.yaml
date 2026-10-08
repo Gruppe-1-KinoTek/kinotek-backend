@@ -25,7 +25,7 @@ jobs:
           sleep 20
 
           # Test the application endpoint
-          curl -f http://localhost:8081/actuator/health || exit 1
+          curl -f https://localhost:8081/actuator/health || exit 1
 
           # Stop and remove the container
           docker compose -f compose.test.yaml down
