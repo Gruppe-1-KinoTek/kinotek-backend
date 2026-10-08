@@ -1,6 +1,6 @@
 services:
   app:
-    image: ghcr.io/kinotek/kinotek-backend/backend:latest
+    image: ghcr.io/gruppe-1-kinotek/kinotek-backend/backend:latest
     restart: unless-stopped
     environment:
       APP_GIT_SHA: ${RELEASE_TAG}

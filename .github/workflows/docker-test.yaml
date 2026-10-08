@@ -1,6 +1,9 @@
 name: docker-test.yaml
 on:
   workflow_call:
+    secrets:
+      TEST_SECRETS:
+        required: true
 
 jobs:
   build:
@@ -22,7 +25,7 @@ jobs:
           sleep 20
 
           # Test the application endpoint
-          curl -f http://localhost:8081 || exit 1
+          curl -f https://127.0.0.1:8081/actuator/health || exit 1
 
           # Stop and remove the container
           docker compose -f compose.test.yaml down
