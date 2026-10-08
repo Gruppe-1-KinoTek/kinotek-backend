@@ -135,7 +135,7 @@ public class ShowingServiceImpl implements ShowingService{
 
     @Override
     public void deleteShowingById(int id){
-        deleteShowing(findShowingById(id));
+        showingRepository.deleteById(id);
     }
 
 }

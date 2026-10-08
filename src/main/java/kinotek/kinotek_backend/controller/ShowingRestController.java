@@ -22,4 +22,6 @@ public class ShowingRestController {
     public List<ShowingDTO> upcomingShowingsByMovieId(@PathVariable int movie_id){
         return showingService.findUpcomingShowingByMovie(movie_id);
     }
+
+    
 }
