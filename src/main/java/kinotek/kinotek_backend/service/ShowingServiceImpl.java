@@ -19,14 +19,17 @@ public class ShowingServiceImpl implements ShowingService{
         this.showingRepository = showingRepository;
     }
 
+    @Override
     public List<Showing> findAllShowing(){
         return showingRepository.findAll();
     }
 
+    @Override
     public Showing findShowingById(int id){
         return showingRepository.getReferenceById(id);
     }
 
+    @Override
     public List<Showing> findShowingByMovieAndDate(Movie movie, LocalDate dateToFind){
         List<Showing> allShowings = showingRepository.findByMovie(movie);
         List<Showing> showingsToReturn = new ArrayList<>();
@@ -40,10 +43,12 @@ public class ShowingServiceImpl implements ShowingService{
         return showingsToReturn;
     }
 
+    @Override
     public List<Showing> findShowingByMovie(Movie movie){
         return showingRepository.findByMovie(movie);
     }
 
+    @Override
     public List<Showing> findUpcomingShowing(){
         List<Showing> allShowings = showingRepository.findAll();
         List<Showing> showingsToReturn = new ArrayList<>();
@@ -58,14 +63,17 @@ public class ShowingServiceImpl implements ShowingService{
         return showingsToReturn;
     }
 
+    @Override
     public void saveShowing(Showing showing){
         showingRepository.save(showing);
     }
 
+    @Override
     public void deleteShowing(Showing showing){
         showingRepository.delete(showing);
     }
 
+    @Override
     public void deleteShowingById(int id){
         deleteShowing(findShowingById(id));
     }
