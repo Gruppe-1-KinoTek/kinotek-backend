@@ -40,6 +40,10 @@ public class ShowingServiceImpl implements ShowingService{
         return showingsToReturn;
     }
 
+    public List<Showing> findShowingByMovie(Movie movie){
+        return showingRepository.findByMovie(movie);
+    }
+
     public List<Showing> findUpcomingShowing(){
         List<Showing> allShowings = showingRepository.findAll();
         List<Showing> showingsToReturn = new ArrayList<>();
