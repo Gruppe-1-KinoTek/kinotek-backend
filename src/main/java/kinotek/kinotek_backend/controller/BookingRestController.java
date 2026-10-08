@@ -20,19 +20,11 @@ import java.util.Set;
 @RequestMapping("")
 public class BookingRestController {
 
-    private final SeatService seatService;
     private final ShowingService showingService;
 
     public BookingRestController(SeatService seatService, ShowingService showingService){
-        this.seatService = seatService;
         this.showingService = showingService;
     }
-
-    @GetMapping("/showing/{showingId}/booked-seats")
-    public List<Seat> getBookedSeats(@PathVariable int showingId) {
-        return seatService.getBookedSeats(showingId);
-    }
-
 
     @GetMapping("/api/showing/{showingId}/seat-map")
     public SeatMapDto getSeatMap(@PathVariable int showingId) {
