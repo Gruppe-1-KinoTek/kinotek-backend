@@ -8,9 +8,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/showing")
+@CrossOrigin("*")
 public class ShowingRestController {
 
-    private ShowingService showingService;
+    private final ShowingService showingService;
 
     public ShowingRestController(ShowingService showingService) {
         this.showingService = showingService;
