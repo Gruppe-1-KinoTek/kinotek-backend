@@ -2,6 +2,8 @@ package kinotek.kinotek_backend.service;
 
 import jakarta.annotation.Nullable;
 import jakarta.transaction.Transactional;
+import kinotek.kinotek_backend.dto.BookingConfirmationDto;
+import kinotek.kinotek_backend.dto.BookingRequestDto;
 import kinotek.kinotek_backend.model.cinema.Booking;
 import kinotek.kinotek_backend.model.cinema.Invoice;
 import kinotek.kinotek_backend.model.cinema.Seat;
@@ -53,31 +55,28 @@ public class BookingServiceImpl implements BookingService {
         Set<Integer> bookedSeatIds = new HashSet<>();
 
         for (Booking b : bookedSeats) {
-            bookedSeatIds.add(b.getId());
+            bookedSeatIds.add(b.getSeat().getId());
         }
 
         return bookedSeatIds;
     }
 
-
-    @Transactional
-    public Map<String, Object> createBookings(int showingId, Set<Integer> seatIds,
-                                              @Nullable String email, Integer phoneNumber) {
-
+    private void validateAtLeastOneChosenSeat(Set<Integer> seatIds) {
         //VALIDATE AT LEAST ONE SEAT HAS BEEN CHOSEN
         if (seatIds == null || seatIds.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Vælg mindst ét sæde");
         }
+    }
 
-
-        //VALIDATE SHOWING HASN'T STARTED
+    private void validateShowingHasNotStarted(int showingId) {
         Showing showing = showingRepository.findById(showingId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Visningen findes ikke"));
         if (showing.getDateTime().isBefore(LocalDateTime.now())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Visningen er begyndt");
         }
+    }
 
-        // VALIDATE EMAIL
+    private void validateEmail(String email) {
         if (email != null && !email.matches(
                 "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
             throw new ResponseStatusException(
@@ -85,14 +84,18 @@ public class BookingServiceImpl implements BookingService {
                     "Ugyldig email"
             );
         }
+    }
 
-        //VALIDATE PHONE NUMBER
-        if (phoneNumber != null && (phoneNumber < 10000000 || phoneNumber > 99999999)) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST,
-                    "Ugyldigt telefonnummer"
-            );
-        }
+
+
+
+    @Transactional
+    public BookingConfirmationDto createBookings(BookingRequestDto bookingRequestDto) {
+
+        validateAtLeastOneChosenSeat(bookingRequestDto.seatIds());
+        validateShowingHasNotStarted(bookingRequestDto.showingId());
+        validateEmail(bookingRequestDto.email());
+
 
 
         //VALIDATE SEATS AND CREATE INVOICE

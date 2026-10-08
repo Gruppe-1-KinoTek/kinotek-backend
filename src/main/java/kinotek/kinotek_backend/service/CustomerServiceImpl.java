@@ -1,4 +1,8 @@
 package kinotek.kinotek_backend.service;
 
-public class CustomerServiceImpl {
+import kinotek.kinotek_backend.repository.user.CustomerRepository;
+
+public class CustomerServiceImpl implements CustomerService {
+
+
 }

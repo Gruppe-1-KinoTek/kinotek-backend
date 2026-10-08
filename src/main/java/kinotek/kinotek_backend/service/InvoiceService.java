@@ -1,5 +1,4 @@
 package kinotek.kinotek_backend.service;
 
-public interface CustomerService {
-
+public interface InvoiceService {
 }
