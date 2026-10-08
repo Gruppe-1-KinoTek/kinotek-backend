@@ -4,6 +4,7 @@ import kinotek.kinotek_backend.model.user.Employee;
 import kinotek.kinotek_backend.model.user.EmployeeRole;
 import kinotek.kinotek_backend.repository.user.EmployeeRepository;
 import kinotek.kinotek_backend.repository.user.RoleRepository;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
