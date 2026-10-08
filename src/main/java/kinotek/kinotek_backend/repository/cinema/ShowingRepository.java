@@ -11,6 +11,6 @@ import java.util.List;
 
 public interface ShowingRepository extends JpaRepository<Showing, Integer> {
 
-    @NativeQuery("select * from Showing showing where showing.movie = ?1")
-    List<Showing> findByMovie(Movie movie);
+    @NativeQuery("select * from Showing as showing where showing.movie_id = ?1")
+    List<Showing> findByMovie(int movie_id);
 }
