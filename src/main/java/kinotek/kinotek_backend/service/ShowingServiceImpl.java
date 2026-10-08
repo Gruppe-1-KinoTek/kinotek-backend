@@ -19,46 +19,15 @@ import java.util.Set;
 
 @Service
 public class ShowingServiceImpl implements ShowingService{
+
     private final ShowingRepository showingRepository;
-    private final BookingService bookingService;
 
 
-    public ShowingServiceImpl(ShowingRepository showingRepository, BookingService bookingService) {
+    public ShowingServiceImpl(ShowingRepository showingRepository) {
         this.showingRepository = showingRepository;
-        this.bookingService = bookingService;
     }
 
-    @Transactional(readOnly = true)
-    public SeatMapDto getSeatMap(int showingId) {
-        Showing showing = findShowingById(showingId);
 
-        Set<Integer> bookedSeatIds = bookingService.bookedSeatIdsByShowingId(showingId);
-
-        Auditorium auditorium = showing.getAuditorium();
-
-        List<SeatStatusDto> seats = new ArrayList<>();
-
-        for(SeatRow row : auditorium.getRows()) {
-            for (Seat seat : row.getSeats()) {
-                seats.add(new SeatStatusDto(
-                        seat.getId(),
-                        row.getId(),
-                        row.getRowLetter(),
-                        seat.getSeatNumber(),
-                        seat.isAccessible(),
-                        bookedSeatIds.contains(seat.getId())
-                ));
-            }
-        }
-
-        return new SeatMapDto(
-                auditorium.getId(),
-                auditorium.getAuditoriumName(),
-                showing.getMovie().getMovieName(),
-                showing.getDateTime(),
-                seats
-        );
-    }
 
     @Override
     public List<Showing> findAllShowing(){

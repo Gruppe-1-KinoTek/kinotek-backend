@@ -101,7 +101,6 @@ Hvis I skal dokumentere det i rapporten, kan I skrive, at koden blev testet med 
  */
 
 @Component
-@Profile({"dev", "prod"})
 public class InitData implements CommandLineRunner {
 
 

@@ -19,6 +19,4 @@ public interface ShowingService {
     void deleteShowing(Showing showing);
     void deleteShowingById(int id);
 
-    public SeatMapDto getSeatMap(int showingId);
-
 }
