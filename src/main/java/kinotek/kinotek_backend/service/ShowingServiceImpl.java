@@ -22,47 +22,16 @@ import java.util.Set;
 @Service
 public class ShowingServiceImpl implements ShowingService{
     private final ShowingRepository showingRepository;
-    private final BookingService bookingService;
     private final ShowingMapper showingMapper;
 
 
-    public ShowingServiceImpl(ShowingRepository showingRepository, BookingService bookingService, ShowingMapper showingMapper) {
+    public ShowingServiceImpl(ShowingRepository showingRepository, ShowingMapper showingMapper) {
+
         this.showingRepository = showingRepository;
-        this.bookingService = bookingService;
         this.showingMapper = showingMapper;
     }
 
-    @Transactional(readOnly = true)
-    public SeatMapDto getSeatMap(int showingId) {
-        Showing showing = findShowingById(showingId);
 
-        Set<Integer> bookedSeatIds = bookingService.bookedSeatIdsByShowingId(showingId);
-
-        Auditorium auditorium = showing.getAuditorium();
-
-        List<SeatStatusDto> seats = new ArrayList<>();
-
-        for(SeatRow row : auditorium.getRows()) {
-            for (Seat seat : row.getSeats()) {
-                seats.add(new SeatStatusDto(
-                        seat.getId(),
-                        row.getId(),
-                        row.getRowLetter(),
-                        seat.getSeatNumber(),
-                        seat.isAccessible(),
-                        bookedSeatIds.contains(seat.getId())
-                ));
-            }
-        }
-
-        return new SeatMapDto(
-                auditorium.getId(),
-                auditorium.getAuditoriumName(),
-                showing.getMovie().getMovieName(),
-                showing.getDateTime(),
-                seats
-        );
-    }
 
     @Override
     public List<Showing> findAllShowing(){
