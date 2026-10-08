@@ -5,9 +5,11 @@ import kinotek.kinotek_backend.dto.SeatStatusDto;
 import kinotek.kinotek_backend.model.cinema.*;
 import kinotek.kinotek_backend.repository.cinema.ShowingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestClient;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -65,7 +67,8 @@ public class ShowingServiceImpl implements ShowingService{
 
     @Override
     public Showing findShowingById(int id){
-        return showingRepository.getReferenceById(id);
+        return showingRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Filmvisningen findes ikke"));
     }
 
     @Override
