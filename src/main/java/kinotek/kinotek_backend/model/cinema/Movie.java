@@ -24,7 +24,6 @@ public class Movie {
 
     @ManyToOne
     @JoinColumn(name = "ageRating", referencedColumnName = "age_rating_id")
-    @JsonManagedReference
     private AgeRating ageRating;
 
     @ManyToMany
@@ -36,7 +35,6 @@ public class Movie {
     private Set<Genre> genres;
 
     @OneToMany(mappedBy = "movie")
-    @JsonBackReference
     private Set<Showing> showings;
 
     //getters and setters
