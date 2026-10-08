@@ -38,3 +38,9 @@ services:
 
 volumes:
   db_data:
+
+networks:
+  db: 
+    driver: bridge
+  app:
+    driver: bridge
