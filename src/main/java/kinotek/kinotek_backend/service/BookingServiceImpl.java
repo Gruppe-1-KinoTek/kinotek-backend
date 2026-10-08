@@ -48,6 +48,17 @@ public class BookingServiceImpl implements BookingService {
 
     }
 
+    public Set<Integer> bookedSeatIdsByShowingId(int showingId) {
+        List<Booking> bookedSeats = bookingRepository.findByShowingId(showingId);
+        Set<Integer> bookedSeatIds = new HashSet<>();
+
+        for (Booking b : bookedSeats) {
+            bookedSeatIds.add(b.getId());
+        }
+
+        return bookedSeatIds;
+    }
+
 
     @Transactional
     public Map<String, Object> createBookings(int showingId, Set<Integer> seatIds,

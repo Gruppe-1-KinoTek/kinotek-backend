@@ -1,22 +1,63 @@
 package kinotek.kinotek_backend.service;
 
-import kinotek.kinotek_backend.model.cinema.Movie;
-import kinotek.kinotek_backend.model.cinema.Showing;
+import kinotek.kinotek_backend.dto.SeatMapDto;
+import kinotek.kinotek_backend.dto.SeatStatusDto;
+import kinotek.kinotek_backend.model.cinema.*;
 import kinotek.kinotek_backend.repository.cinema.ShowingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestClient;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ShowingServiceImpl implements ShowingService{
     private final ShowingRepository showingRepository;
+    private final BookingService bookingService;
 
-    public ShowingServiceImpl(ShowingRepository showingRepository) {
+
+    public ShowingServiceImpl(ShowingRepository showingRepository, BookingService bookingService) {
         this.showingRepository = showingRepository;
+        this.bookingService = bookingService;
+    }
+
+    @Transactional(readOnly = true)
+    public SeatMapDto getSeatMap(int showingId) {
+        Showing showing = findShowingById(showingId);
+
+        Set<Integer> bookedSeatIds = bookingService.bookedSeatIdsByShowingId(showingId);
+
+        Auditorium auditorium = showing.getAuditorium();
+
+        List<SeatStatusDto> seats = new ArrayList<>();
+
+        for(SeatRow row : auditorium.getRows()) {
+            for (Seat seat : row.getSeats()) {
+                seats.add(new SeatStatusDto(
+                        seat.getId(),
+                        row.getId(),
+                        row.getRowLetter(),
+                        seat.getSeatNumber(),
+                        seat.isAccessible(),
+                        bookedSeatIds.contains(seat.getId())
+                ));
+            }
+        }
+
+        return new SeatMapDto(
+                auditorium.getId(),
+                auditorium.getAuditoriumName(),
+                showing.getMovie().getMovieName(),
+                showing.getDateTime(),
+                seats
+        );
     }
 
     public List<Showing> findAllShowing(){
@@ -24,7 +65,8 @@ public class ShowingServiceImpl implements ShowingService{
     }
 
     public Showing findShowingById(int id){
-        return showingRepository.getReferenceById(id);
+        return showingRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Filmvisningen findes ikke"));
     }
 
     public List<Showing> findShowingByMovieAndDate(Movie movie, LocalDate dateToFind){
