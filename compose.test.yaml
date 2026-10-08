@@ -40,6 +40,8 @@ volumes:
   db_data:
 
 networks:
+  local:
+    driver: bridge
   db: 
     driver: bridge
   app:
