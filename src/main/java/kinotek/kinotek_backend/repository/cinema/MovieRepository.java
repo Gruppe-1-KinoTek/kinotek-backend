@@ -13,4 +13,5 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
     @Query("SELECT DISTINCT m FROM Movie m JOIN m.showings s WHERE s.dateTime >= :now")
     List<Movie> findNowPlaying(@Param("now") LocalDateTime now);
 
+    Movie findMovieByMovieName(String movie);
 }
