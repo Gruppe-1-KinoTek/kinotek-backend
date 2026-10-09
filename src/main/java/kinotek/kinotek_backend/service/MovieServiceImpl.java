@@ -9,6 +9,7 @@ import kinotek.kinotek_backend.repository.cinema.GenreRepository;
 import kinotek.kinotek_backend.repository.cinema.MovieRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -35,6 +36,14 @@ public class MovieServiceImpl implements MovieService {
         return result;
     }
 
+    @Override
+    public List<MovieDTO> getNowPlayingMovies() {
+        List<MovieDTO> result = new ArrayList<>();
+        for (Movie movie : movieRepository.findNowPlaying(LocalDateTime.now())) {
+            result.add(toDTO(movie));
+        }
+        return result;
+    }
 
     @Override
     public MovieDTO getMovieById(int id) {

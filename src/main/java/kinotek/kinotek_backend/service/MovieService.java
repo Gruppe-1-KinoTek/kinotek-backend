@@ -17,4 +17,6 @@ public interface MovieService {
     List<Genre> getGenres();
     List<AgeRating> ageRatings();
 
+    List<MovieDTO> getNowPlayingMovies();
+
 }
