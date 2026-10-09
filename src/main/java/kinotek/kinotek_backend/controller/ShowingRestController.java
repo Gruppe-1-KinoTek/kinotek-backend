@@ -23,5 +23,10 @@ public class ShowingRestController {
         return showingService.findUpcomingShowingByMovie(movie_id);
     }
 
+    @PostMapping("/{id}/delete")
+    public void deleteShowingId(@PathVariable int id) {
+        showingService.deleteShowingById(id);
+    }
+
     
 }

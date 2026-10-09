@@ -5,6 +5,7 @@ import kinotek.kinotek_backend.dto.SeatStatusDto;
 import kinotek.kinotek_backend.dto.ShowingDTO;
 import kinotek.kinotek_backend.dto.ShowingMapper;
 import kinotek.kinotek_backend.model.cinema.*;
+import kinotek.kinotek_backend.repository.cinema.BookingRepository;
 import kinotek.kinotek_backend.repository.cinema.ShowingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,12 +24,14 @@ import java.util.Set;
 public class ShowingServiceImpl implements ShowingService{
     private final ShowingRepository showingRepository;
     private final ShowingMapper showingMapper;
+    private final BookingRepository bookingRepository;
 
 
-    public ShowingServiceImpl(ShowingRepository showingRepository, ShowingMapper showingMapper) {
+    public ShowingServiceImpl(ShowingRepository showingRepository, ShowingMapper showingMapper, BookingRepository bookingRepository) {
 
         this.showingRepository = showingRepository;
         this.showingMapper = showingMapper;
+        this.bookingRepository = bookingRepository;
     }
 
 
@@ -104,6 +107,7 @@ public class ShowingServiceImpl implements ShowingService{
 
     @Override
     public void deleteShowingById(int id){
+        bookingRepository.deleteAll(bookingRepository.findByShowingId(id));
         showingRepository.deleteById(id);
     }
 
