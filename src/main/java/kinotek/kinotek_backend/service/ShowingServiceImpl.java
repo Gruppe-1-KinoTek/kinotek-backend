@@ -5,6 +5,7 @@ import kinotek.kinotek_backend.dto.SeatStatusDto;
 import kinotek.kinotek_backend.dto.ShowingDTO;
 import kinotek.kinotek_backend.dto.ShowingMapper;
 import kinotek.kinotek_backend.model.cinema.*;
+import kinotek.kinotek_backend.repository.cinema.BookingRepository;
 import kinotek.kinotek_backend.repository.cinema.AuditoriumRepository;
 import kinotek.kinotek_backend.repository.cinema.MovieRepository;
 import kinotek.kinotek_backend.repository.cinema.ShowingRepository;
@@ -27,6 +28,7 @@ public class ShowingServiceImpl implements ShowingService{
     private final MovieRepository movieRepository;
     private final AuditoriumRepository auditoriumRepository;
     private final ShowingMapper showingMapper;
+    private final BookingRepository bookingRepository;
 
 
     public ShowingServiceImpl(ShowingRepository showingRepository, MovieRepository movieRepository, AuditoriumRepository auditoriumRepository, ShowingMapper showingMapper) {
@@ -35,6 +37,7 @@ public class ShowingServiceImpl implements ShowingService{
         this.movieRepository = movieRepository;
         this.auditoriumRepository = auditoriumRepository;
         this.showingMapper = showingMapper;
+        this.bookingRepository = bookingRepository;
     }
 
 
@@ -112,6 +115,7 @@ public class ShowingServiceImpl implements ShowingService{
 
     @Override
     public void deleteShowingById(int id){
+        bookingRepository.deleteAll(bookingRepository.findByShowingId(id));
         showingRepository.deleteById(id);
     }
 
