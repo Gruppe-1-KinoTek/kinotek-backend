@@ -1,6 +1,7 @@
 package kinotek.kinotek_backend.model.cinema;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
@@ -17,7 +18,7 @@ public class AgeRating {
 
     //One to many
     @OneToMany(mappedBy = "ageRating")
-    @JsonBackReference
+    @JsonIgnore
     private Set<Movie> movies = new HashSet<>();
 
     public int getId() {
