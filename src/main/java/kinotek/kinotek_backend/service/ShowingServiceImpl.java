@@ -31,7 +31,7 @@ public class ShowingServiceImpl implements ShowingService{
     private final BookingRepository bookingRepository;
 
 
-    public ShowingServiceImpl(ShowingRepository showingRepository, MovieRepository movieRepository, AuditoriumRepository auditoriumRepository, ShowingMapper showingMapper) {
+    public ShowingServiceImpl(ShowingRepository showingRepository, MovieRepository movieRepository, AuditoriumRepository auditoriumRepository, ShowingMapper showingMapper, BookingRepository bookingRepository) {
 
         this.showingRepository = showingRepository;
         this.movieRepository = movieRepository;
