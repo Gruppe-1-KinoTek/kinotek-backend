@@ -3,7 +3,6 @@ package kinotek.kinotek_backend.service;
 import kinotek.kinotek_backend.dto.MovieDTO;
 import kinotek.kinotek_backend.model.cinema.AgeRating;
 import kinotek.kinotek_backend.model.cinema.Genre;
-import kinotek.kinotek_backend.model.cinema.Movie;
 
 import java.util.List;
 
