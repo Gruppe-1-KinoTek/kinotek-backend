@@ -1,7 +1,6 @@
 package kinotek.kinotek_backend.service;
 
-import kinotek.kinotek_backend.dto.SeatMapDto;
-import kinotek.kinotek_backend.dto.SeatStatusDto;
+
 import kinotek.kinotek_backend.dto.ShowingDTO;
 import kinotek.kinotek_backend.dto.ShowingMapper;
 import kinotek.kinotek_backend.model.cinema.*;
@@ -9,18 +8,12 @@ import kinotek.kinotek_backend.repository.cinema.BookingRepository;
 import kinotek.kinotek_backend.repository.cinema.AuditoriumRepository;
 import kinotek.kinotek_backend.repository.cinema.MovieRepository;
 import kinotek.kinotek_backend.repository.cinema.ShowingRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.RestClient;
 import org.springframework.web.server.ResponseStatusException;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class ShowingServiceImpl implements ShowingService{
