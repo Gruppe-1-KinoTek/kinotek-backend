@@ -17,7 +17,7 @@ public interface ShowingService {
     List<Showing> findShowingByMovie(int movie_id);
     List<Showing> findUpcomingShowing();
     List<ShowingDTO> findUpcomingShowingByMovie(int movie_id);
-    void saveShowing(Showing showing);
+    void saveShowing(ShowingDTO showingDTO);
     void deleteShowing(Showing showing);
     void deleteShowingById(int id);
 

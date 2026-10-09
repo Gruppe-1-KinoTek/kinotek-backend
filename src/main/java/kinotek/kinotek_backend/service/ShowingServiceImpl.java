@@ -6,6 +6,8 @@ import kinotek.kinotek_backend.dto.ShowingDTO;
 import kinotek.kinotek_backend.dto.ShowingMapper;
 import kinotek.kinotek_backend.model.cinema.*;
 import kinotek.kinotek_backend.repository.cinema.BookingRepository;
+import kinotek.kinotek_backend.repository.cinema.AuditoriumRepository;
+import kinotek.kinotek_backend.repository.cinema.MovieRepository;
 import kinotek.kinotek_backend.repository.cinema.ShowingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,13 +25,17 @@ import java.util.Set;
 @Service
 public class ShowingServiceImpl implements ShowingService{
     private final ShowingRepository showingRepository;
+    private final MovieRepository movieRepository;
+    private final AuditoriumRepository auditoriumRepository;
     private final ShowingMapper showingMapper;
     private final BookingRepository bookingRepository;
 
 
-    public ShowingServiceImpl(ShowingRepository showingRepository, ShowingMapper showingMapper, BookingRepository bookingRepository) {
+    public ShowingServiceImpl(ShowingRepository showingRepository, MovieRepository movieRepository, AuditoriumRepository auditoriumRepository, ShowingMapper showingMapper) {
 
         this.showingRepository = showingRepository;
+        this.movieRepository = movieRepository;
+        this.auditoriumRepository = auditoriumRepository;
         this.showingMapper = showingMapper;
         this.bookingRepository = bookingRepository;
     }
@@ -96,8 +102,10 @@ public class ShowingServiceImpl implements ShowingService{
     }
 
     @Override
-    public void saveShowing(Showing showing){
-        showingRepository.save(showing);
+    public void saveShowing(ShowingDTO showingDTO){
+        Movie movie = movieRepository.findMovieByMovieName(showingDTO.getMovie());
+        Auditorium auditorium = auditoriumRepository.findAuditoriumByAuditoriumName(showingDTO.getAuditorium());
+        showingRepository.save(showingMapper.DtoToShowing(showingDTO, movie, auditorium));
     }
 
     @Override

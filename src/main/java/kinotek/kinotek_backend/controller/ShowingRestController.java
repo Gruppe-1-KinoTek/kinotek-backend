@@ -2,6 +2,7 @@ package kinotek.kinotek_backend.controller;
 
 import kinotek.kinotek_backend.dto.ShowingDTO;
 import kinotek.kinotek_backend.service.ShowingService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,5 +29,11 @@ public class ShowingRestController {
         showingService.deleteShowingById(id);
     }
 
+    @PostMapping("/create-showing")
+    @ResponseStatus(HttpStatus.CREATED)
+    public String saveShowing(@RequestBody ShowingDTO showingDTO){
+        showingService.saveShowing(showingDTO);
+        return "Showing created";
+    }
     
 }

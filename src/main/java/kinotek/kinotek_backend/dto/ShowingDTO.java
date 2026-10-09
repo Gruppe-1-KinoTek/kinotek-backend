@@ -6,6 +6,7 @@ public class ShowingDTO {
     private int id;
     private LocalDateTime dateTime;
     private String auditorium;
+    private String movie;
 
     public ShowingDTO() {
     }
@@ -32,5 +33,13 @@ public class ShowingDTO {
 
     public void setAuditorium(String auditorium) {
         this.auditorium = auditorium;
+    }
+
+    public String getMovie() {
+        return movie;
+    }
+
+    public void setMovie(String movie) {
+        this.movie = movie;
     }
 }
