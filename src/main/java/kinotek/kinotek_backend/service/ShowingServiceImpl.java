@@ -105,6 +105,9 @@ public class ShowingServiceImpl implements ShowingService{
     public void saveShowing(ShowingDTO showingDTO){
         Movie movie = movieRepository.findMovieByMovieName(showingDTO.getMovie());
         Auditorium auditorium = auditoriumRepository.findAuditoriumByAuditoriumName(showingDTO.getAuditorium());
+        if (movie == null || auditorium == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Ukendt film eller sal");
+        }
         showingRepository.save(showingMapper.DtoToShowing(showingDTO, movie, auditorium));
     }
 
