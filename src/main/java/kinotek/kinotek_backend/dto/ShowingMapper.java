@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 public class ShowingMapper {
     public ShowingDTO showingToDto(Showing showing){
         ShowingDTO showingDTO = new ShowingDTO();
+        showingDTO.setId(showing.getId());
         showingDTO.setAuditorium(showing.getAuditorium().getAuditoriumName());
         showingDTO.setDateTime(showing.getDateTime());
         return showingDTO;
